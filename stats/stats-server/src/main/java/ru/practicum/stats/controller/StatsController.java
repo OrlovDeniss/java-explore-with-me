@@ -19,9 +19,9 @@ public interface StatsController {
     ResponseEntity<EndpointHit> post(@Valid @RequestBody EndpointHit endpointHit);
 
     @GetMapping("/stats")
-    List<ViewStats> get(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
-                        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
-                        @RequestParam(required = false, defaultValue = "") List<String> uris,
-                        @RequestParam(required = false, defaultValue = "false") boolean unique);
+    ResponseEntity<List<ViewStats>> get(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+                                        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
+                                        @RequestParam(required = false, defaultValue = "") List<String> uris,
+                                        @RequestParam(required = false, defaultValue = "false") boolean unique);
 
 }

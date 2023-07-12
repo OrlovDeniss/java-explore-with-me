@@ -1,6 +1,6 @@
 package ru.practicum.stats.service.finder;
 
-import ru.practicum.stats.model.ViewStatsProjection;
+import ru.practicum.dto.ViewStats;
 import ru.practicum.stats.repository.StatsRepository;
 
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ public class FindAllViewStatsByTimeRange implements FinderStrategy {
     }
 
     @Override
-    public List<ViewStatsProjection> findAllViewStatsProjections() {
+    public List<ViewStats> findAllViewStatsProjections() {
         if (uris.isEmpty()) {
             return statsRepository.findALlViewStatsByTimeRange(start, end);
         } else {

@@ -1,11 +1,11 @@
 package ru.practicum.stats.service.finder;
 
-import ru.practicum.stats.model.ViewStatsProjection;
+import ru.practicum.dto.ViewStats;
 
 import java.util.List;
 
 public interface FinderStrategy {
 
-    List<ViewStatsProjection> findAllViewStatsProjections();
+    List<ViewStats> findAllViewStatsProjections();
 
 }

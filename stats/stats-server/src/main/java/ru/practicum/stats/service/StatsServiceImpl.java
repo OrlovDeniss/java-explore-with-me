@@ -6,7 +6,6 @@ import ru.practicum.dto.EndpointHit;
 import ru.practicum.dto.ViewStats;
 import ru.practicum.stats.mapper.StatsMapper;
 import ru.practicum.stats.model.Stats;
-import ru.practicum.stats.model.ViewStatsProjection;
 import ru.practicum.stats.repository.StatsRepository;
 import ru.practicum.stats.service.finder.FindAllUniqueViewStatsByTimeRange;
 import ru.practicum.stats.service.finder.FindAllViewStatsByTimeRange;
@@ -34,19 +33,15 @@ public class StatsServiceImpl implements StatsService {
         } else {
             finderStrategy = new FindAllViewStatsByTimeRange(start, end, uris, statsRepository);
         }
-        return toDto(finderStrategy.findAllViewStatsProjections());
+        return finderStrategy.findAllViewStatsProjections();
     }
 
     private Stats toEntity(EndpointHit endpointHit) {
         return StatsMapper.INSTANCE.toEntity(endpointHit);
     }
 
-    private List<ViewStats> toDto(List<ViewStatsProjection> viewStatsProjections) {
-        return StatsMapper.INSTANCE.toDto(viewStatsProjections);
-    }
-
-    private EndpointHit toDto(Stats statistic) {
-        return StatsMapper.INSTANCE.toDto(statistic);
+    private EndpointHit toDto(Stats stats) {
+        return StatsMapper.INSTANCE.toDto(stats);
     }
 
 }

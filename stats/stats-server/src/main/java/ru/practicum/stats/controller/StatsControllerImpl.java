@@ -19,19 +19,19 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class StatsControllerImpl implements StatsController {
-    private final StatsServiceImpl statisticServiceImpl;
+    private final StatsServiceImpl statsService;
 
     @Override
     public ResponseEntity<EndpointHit> post(EndpointHit endpointHit) {
         log.info("POST /hit with dto: {}.", endpointHit);
-        return new ResponseEntity<>(statisticServiceImpl.saveHit(endpointHit), HttpStatus.CREATED);
+        return new ResponseEntity<>(statsService.saveHit(endpointHit), HttpStatus.CREATED);
     }
 
     @Override
-    public List<ViewStats> get(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
+    public ResponseEntity<List<ViewStats>> get(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
         throwWhenStartAfterEnd(start, end);
         log.info("GET /stats with params: {}, {}, {}, {}", start, end, uris, unique);
-        return statisticServiceImpl.getViewStats(start, end, uris, unique);
+        return new ResponseEntity<>(statsService.getViewStats(start, end, uris, unique), HttpStatus.OK);
     }
 
     private void throwWhenStartAfterEnd(LocalDateTime start, LocalDateTime end) {
