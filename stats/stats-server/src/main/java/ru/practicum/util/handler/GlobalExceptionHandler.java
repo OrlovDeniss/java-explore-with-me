@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -27,9 +28,12 @@ public class GlobalExceptionHandler {
         return new ApiError(errors.toString());
     }
 
-    @ExceptionHandler(StartAfterEndException.class)
+    @ExceptionHandler({
+            MissingServletRequestParameterException.class,
+            StartAfterEndException.class
+    })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handleBadRequests(RuntimeException e) {
+    public ApiError handleBadRequests(final RuntimeException e) {
         log.info(e.getMessage());
         return new ApiError(e.getMessage());
     }
@@ -38,7 +42,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleThrowable(final Throwable e) {
         log.info(e.getMessage());
-        return new ApiError("Неизвестная ошибка, обратитесь к логам.");
+        return new ApiError("An unexpected error occurred while processing the request");
     }
 
 }

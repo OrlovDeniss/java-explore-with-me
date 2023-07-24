@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface FinderStrategy {
 
-    List<ViewStats> findAllViewStatsProjections();
+    List<ViewStats> findAllViewStats();
 
 }

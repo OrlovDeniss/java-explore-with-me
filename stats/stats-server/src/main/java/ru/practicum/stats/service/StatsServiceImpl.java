@@ -33,7 +33,7 @@ public class StatsServiceImpl implements StatsService {
         } else {
             finderStrategy = new FindAllViewStatsByTimeRange(start, end, uris, statsRepository);
         }
-        return finderStrategy.findAllViewStatsProjections();
+        return finderStrategy.findAllViewStats();
     }
 
     private Stats toEntity(EndpointHit endpointHit) {
