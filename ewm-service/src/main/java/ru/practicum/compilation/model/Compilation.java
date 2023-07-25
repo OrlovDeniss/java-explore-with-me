@@ -1,17 +1,18 @@
 package ru.practicum.compilation.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 import ru.practicum.event.model.Event;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
-@Data
 @Entity
+@Getter
+@Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Compilation {
@@ -20,8 +21,26 @@ public class Compilation {
     private Integer id;
 
     @ManyToMany
+    @JoinTable(
+            name = "compilation_events",
+            joinColumns = @JoinColumn(name = "compilation_id"),
+            inverseJoinColumns = @JoinColumn(name = "events_id"))
+    @ToString.Exclude
     private List<Event> events;
 
     private boolean pinned;
     private String title;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Compilation that = (Compilation) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

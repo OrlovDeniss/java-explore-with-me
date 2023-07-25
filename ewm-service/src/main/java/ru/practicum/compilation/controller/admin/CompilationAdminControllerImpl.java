@@ -36,9 +36,9 @@ public class CompilationAdminControllerImpl implements CompilationAdminControlle
     }
 
     @Override
-    public ResponseEntity<Object> deleteCompilationByAdmin(Integer compId) {
+    public ResponseEntity<Void> deleteCompilationByAdmin(Integer compId) {
         log.info("DELETE admin/compilations/{}.", compId);
         compilationService.deleteCompilationByAdmin(compId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }

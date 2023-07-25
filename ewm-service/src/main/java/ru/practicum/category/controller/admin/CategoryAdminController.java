@@ -18,6 +18,6 @@ public interface CategoryAdminController {
                                                       @Valid @RequestBody CategoryDto categoryDto);
 
     @DeleteMapping("{catId}")
-    ResponseEntity<Object> deleteCategoryByAdmin(@PathVariable @Positive Integer catId);
+    ResponseEntity<Void> deleteCategoryByAdmin(@PathVariable @Positive Integer catId);
 
 }

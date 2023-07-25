@@ -26,6 +26,6 @@ public interface UserAdminController {
     ResponseEntity<UserDto> saveNewUserByAdmin(@Valid @RequestBody NewUserRequest newUserRequest);
 
     @DeleteMapping("{userId}")
-    ResponseEntity<Object> deleteUserByAdmin(@PathVariable @Positive Integer userId);
+    ResponseEntity<Void> deleteUserByAdmin(@PathVariable @Positive Integer userId);
 
 }

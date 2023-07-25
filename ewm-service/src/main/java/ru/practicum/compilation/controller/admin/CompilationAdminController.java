@@ -19,6 +19,6 @@ public interface CompilationAdminController {
                                                             @Valid @RequestBody UpdateCompilationRequest dto);
 
     @DeleteMapping("{compId}")
-    ResponseEntity<Object> deleteCompilationByAdmin(@PathVariable @Positive Integer compId);
+    ResponseEntity<Void> deleteCompilationByAdmin(@PathVariable @Positive Integer compId);
 
 }

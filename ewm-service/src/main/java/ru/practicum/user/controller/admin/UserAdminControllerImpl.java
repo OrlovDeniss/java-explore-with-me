@@ -25,19 +25,21 @@ public class UserAdminControllerImpl implements UserAdminController {
     @Override
     public ResponseEntity<List<UserDto>> getUsersByAdmin(Set<Integer> ids, Integer from, Integer size) {
         log.info("GET /admin/users ids: {}, from: {}. size: {}.", ids, from, size);
-        return new ResponseEntity<>(userService.getUsersByAdmin(ids, from, size), HttpStatus.OK);
+        return ResponseEntity.ok().body(userService.getUsersByAdmin(ids, from, size));
     }
 
     @Override
     public ResponseEntity<UserDto> saveNewUserByAdmin(NewUserRequest newUserRequest) {
         log.info("POST /admin/users dto: {}.", newUserRequest);
-        return new ResponseEntity<>(userService.saveNewUserByAdmin(newUserRequest), HttpStatus.CREATED);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(userService.saveNewUserByAdmin(newUserRequest));
     }
 
     @Override
-    public ResponseEntity<Object> deleteUserByAdmin(Integer userId) {
+    public ResponseEntity<Void> deleteUserByAdmin(Integer userId) {
         log.info("DELETE /admin/users/{}", userId);
         userService.deleteUserByAdmin(userId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }

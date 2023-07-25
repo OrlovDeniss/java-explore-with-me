@@ -34,9 +34,9 @@ public class CategoryAdminControllerImpl implements CategoryAdminController {
     }
 
     @Override
-    public ResponseEntity<Object> deleteCategoryByAdmin(Integer catId) {
+    public ResponseEntity<Void> deleteCategoryByAdmin(Integer catId) {
         log.info("DELETE admin/categories/{}.", catId);
         categoryService.deleteCategoryByAdmin(catId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }
