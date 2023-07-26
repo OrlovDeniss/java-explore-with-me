@@ -23,11 +23,7 @@ public class FindAllUniqueViewStatsByTimeRange implements FinderStrategy {
     }
 
     @Override
-    public List<ViewStats> findAllViewStatsProjections() {
-        if (uris.isEmpty()) {
-            return statsRepository.findALlUniqueViewStatsByTimeRange(start, end);
-        } else {
-            return statsRepository.findALlUniqueViewStatsByTimeRange(start, end, uris);
-        }
+    public List<ViewStats> findAllViewStats() {
+        return statsRepository.findALlUniqueViewStatsByTimeRange(start, end, uris);
     }
 }
