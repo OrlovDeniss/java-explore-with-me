@@ -32,9 +32,14 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
             "  AND (:paid IS NULL OR e.paid = :paid) " +
             "  AND ((:onlyAvailable IS TRUE AND (e.participantLimit > e.confirmedRequests OR e.participantLimit = 0)) " +
             "    OR :onlyAvailable IS FALSE) " +
-            "  AND e.eventDate BETWEEN :start AND :end ")
+            "  AND e.eventDate BETWEEN :start AND :end " +
+            "  AND ((:locIds) IS NULL " +
+            "    OR EXISTS(select loc.id from Location loc" +
+            "      where loc.id IN (:locIds) " +
+            "        AND function('distance', e.location.lon, e.location.lat, loc.lon, loc.lat) <= loc.radius)) ")
     Page<Event> findEvents(String text,
                            Set<Integer> categoryIds,
+                           Set<Integer> locIds,
                            Boolean paid,
                            boolean onlyAvailable,
                            LocalDateTime start,
@@ -46,10 +51,15 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
             "WHERE ((:users) IS NULL OR e.initiator.id IN (:users)) " +
             "  AND ((:states) IS NULL OR e.state IN (:states)) " +
             "  AND ((:categories) IS NULL OR e.category.id IN (:categories)) " +
-            "  AND e.eventDate BETWEEN :start AND :end ")
+            "  AND e.eventDate BETWEEN :start AND :end " +
+            "  AND ((:locIds) IS NULL OR " +
+            "    EXISTS(select loc.id from Location loc " +
+            "      where loc.id IN (:locIds) " +
+            "        AND function('distance', e.location.lon, e.location.lat, loc.lon, loc.lat) <= loc.radius)) ")
     Page<Event> findEvents(Set<Integer> users,
                            Set<State> states,
                            Set<Integer> categories,
+                           Set<Integer> locIds,
                            LocalDateTime start,
                            LocalDateTime end,
                            Pageable pageable);

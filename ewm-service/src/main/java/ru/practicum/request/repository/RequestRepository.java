@@ -17,7 +17,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
             "JOIN FETCH r.event " +
             "WHERE r.id = :requestId " +
             "  AND r.requester.id = :requesterId ")
-    Optional<Request> findByIdAndRequesterIdWithEvent(Integer requestId, Integer requesterId);
+    Optional<Request> findByIdAndRequesterId(Integer requestId, Integer requesterId);
 
     List<Request> findAllByEventId(Integer eventId);
 

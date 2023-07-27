@@ -11,6 +11,7 @@ import java.util.Set;
 public class EventPublicQuery {
     private String text;
     private Set<Integer> categories;
+    private Set<Integer> locations;
     private Boolean paid;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -151,7 +151,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     private Request findRequestWithEventOrThrow(Integer userId, Integer requestId) {
-        return requestRepository.findByIdAndRequesterIdWithEvent(requestId, userId)
+        return requestRepository.findByIdAndRequesterId(requestId, userId)
                 .orElseThrow(() -> {
                     throw new RequestNotFoundException(
                             String.format("Request with id=%d was not found", requestId));
