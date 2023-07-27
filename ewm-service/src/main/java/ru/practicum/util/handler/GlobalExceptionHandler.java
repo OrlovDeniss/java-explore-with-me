@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.practicum.util.exception.category.CategoryNotFoundException;
 import ru.practicum.util.exception.event.*;
-import ru.practicum.util.exception.request.AutorRequestException;
-import ru.practicum.util.exception.request.RequestAlreadyExistException;
-import ru.practicum.util.exception.request.RequestConfirmationNotRequiredException;
+import ru.practicum.util.exception.location.LocationCoordinatesAlreadyExistException;
+import ru.practicum.util.exception.location.LocationNotFoundException;
+import ru.practicum.util.exception.request.*;
+import ru.practicum.util.exception.user.UserNotAuthorException;
 import ru.practicum.util.exception.user.UserNotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +62,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             CategoryNotFoundException.class,
             UserNotFoundException.class,
-            EventNotFoundException.class
+            EventNotFoundException.class,
+            LocationNotFoundException.class,
+            RequestNotFoundException.class
     })
     public ResponseEntity<ApiError> handleNotFound(HttpServletRequest request,
                                                    final RuntimeException e) {
@@ -75,9 +78,12 @@ public class GlobalExceptionHandler {
             UpdateEventException.class,
             EventUpdateStateException.class,
             RequestAlreadyExistException.class,
+            RequestNotPendingException.class,
             AutorRequestException.class,
+            UserNotAuthorException.class,
             EventNotPublishedException.class,
-            EventParticipationLimitException.class
+            EventParticipationLimitException.class,
+            LocationCoordinatesAlreadyExistException.class
     })
     public ResponseEntity<ApiError> handleConflict(HttpServletRequest request,
                                                    final RuntimeException e) {

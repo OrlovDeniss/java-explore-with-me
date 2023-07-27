@@ -16,6 +16,7 @@ public class EventAdminQuery {
     private Set<Integer> users;
     private Set<State> states = Set.of(State.PENDING);
     private Set<Integer> categories;
+    private Set<Integer> locations;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime rangeStart = LocalDateTime.now();

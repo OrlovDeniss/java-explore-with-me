@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.practicum.event.enums.StateAction;
-import ru.practicum.event.model.Location;
+import ru.practicum.event.model.EventLocation;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Positive;
@@ -30,7 +30,7 @@ public class UpdateEventRequest {
     @Future
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate;
-    private Location location;
+    private EventLocation location;
     private Boolean paid;
     private Boolean requestModeration;
     private Integer participantLimit;
